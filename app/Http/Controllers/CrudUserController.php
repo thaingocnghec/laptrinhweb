@@ -78,7 +78,7 @@ class CrudUserController extends Controller
         $user_id = $request->get('id');
         $user = User::find($user_id);
 
-        return view('crud_user.read', ['messi' => $user]);
+        return view('crud_user.read', ['user' => $user]);
     }
 
     /**
@@ -118,7 +118,7 @@ class CrudUserController extends Controller
        $user = User::find($input['id']);
        $user->name = $input['name'];
        $user->email = $input['email'];
-       $user->password = $input['password'];
+       $user->password = Hash::make($input['password']);
        $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
